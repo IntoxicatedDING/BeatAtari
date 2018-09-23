@@ -1,12 +1,26 @@
 import os
-os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
+from keras import backend as K
+# ================================================
+# use plaidml as backend
+# install plaidml:
+# pip install plaidml-keras
+# plaidml-setup
+# os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
+# ================================================
+# use tensorflow as backend
+import tensorflow as tf
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+config = tf.ConfigProto()
+config.gpu_options.allow_growth = True
+K.set_session(tf.Session(config=config))
+# ================================================
+
 import numpy as np
 from keras.layers import Input, Dense, Flatten
 from keras.models import Model
 from keras.layers import Convolution2D, Lambda
 from keras.engine.topology import Layer
 from keras import optimizers
-from keras import backend as K
 from keras import initializers
 from keras import losses
 import gym
@@ -14,7 +28,9 @@ import cv2
 from collections import deque
 import random
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+
+
+
 TRAIN = True
 INITIAL = True & TRAIN
 NUM_ACTIONS = 4
