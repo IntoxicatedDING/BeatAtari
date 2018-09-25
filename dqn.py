@@ -22,14 +22,10 @@ from keras.layers import Convolution2D, Lambda
 from keras.engine.topology import Layer
 from keras import optimizers
 from keras import initializers
-from keras import losses
 import gym
 import cv2
 from collections import deque
 import random
-
-
-
 
 TRAIN = True
 INITIAL = True & TRAIN
@@ -80,14 +76,23 @@ class LayerNormalization(Layer):
         super(LayerNormalization, self).build(input_shape)  # Be sure to call this somewhere!
 
     def call(self, inputs, **kwargs):
-        inputs_reshaped = K.reshape(inputs, (-1, self.channels))
-        mean = K.mean(inputs_reshaped, axis=1, keepdims=True)
-        var = K.mean(K.square(inputs_reshaped - mean), axis=1, keepdims=True)
-        outputs = (inputs_reshaped - mean) / K.sqrt(var + self.eps)
+        dim = len(K.int_shape(inputs)) - 1
+        mean = K.mean(inputs, axis=dim, keepdims=True)
+        var = K.mean(K.square(inputs - mean), axis=dim, keepdims=True)
+        outputs = (inputs - mean) / K.sqrt(var + self.eps)
         outputs = outputs * self.trainable_weights[0] + self.trainable_weights[1]
         if self.activation is None:
-            return K.reshape(outputs, K.shape(inputs))
-        return self.activation(K.reshape(outputs, K.shape(inputs)))
+            return outputs
+        else:
+            return self.activation(outputs)
+        # inputs_reshaped = K.reshape(inputs, (-1, self.channels))
+        # mean = K.mean(inputs_reshaped, axis=1, keepdims=True)
+        # var = K.mean(K.square(inputs_reshaped - mean), axis=1, keepdims=True)
+        # outputs = (inputs_reshaped - mean) / K.sqrt(var + self.eps)
+        # outputs = outputs * self.trainable_weights[0] + self.trainable_weights[1]
+        # if self.activation is None:
+        #     return K.reshape(outputs, K.shape(inputs))
+        # return self.activation(K.reshape(outputs, K.shape(inputs)))
 
 
 class Agent:
