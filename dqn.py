@@ -26,9 +26,12 @@ import gym
 import cv2
 from collections import deque
 import random
-
+# ================================================
+# set the boolean variable TRAIN to true to train the model
+# set the boolean variable INITIAL to true to initialize the model
 TRAIN = True
 INITIAL = True & TRAIN
+# ================================================
 NUM_ACTIONS = 4
 STATE_LENGTH = 4
 EPSILON_INITIAL = 1.
