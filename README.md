@@ -1,5 +1,8 @@
 # BeatAtari
-Implementation of an agent to beat Atari based on deep Q-Network.
+Keras/TensorFlow implementation of an agent to beat Atari based on deep Q-Network.  
+This implementation has referred to the [code](https://github.com/devsisters/DQN-tensorflow.git) by devsisters.
+However, the tricks to make the model converge are too complicated and the agent can rarely achieve mre than 100 points. You have to carefully adjust the hyper-parameters. 
+To solve this problem, I apply **layer normalization** to each layer and finally the agent gets a much better performance
 
 ## Environment
 - Python 3.6
@@ -7,7 +10,7 @@ Implementation of an agent to beat Atari based on deep Q-Network.
 - Keras  
 - Opencv  
 - Gym
-- PlaidML (If you want to train on AMD GPU)
+- [PlaidML](https://github.com/plaidml/plaidml) (If you want to train on AMD GPU)
 
 
 Install prerequisites with:
