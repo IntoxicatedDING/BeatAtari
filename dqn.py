@@ -29,7 +29,7 @@ import random
 # ================================================
 # set the boolean variable TRAIN to true to train the model
 # set the boolean variable INITIAL to true to initialize the model
-TRAIN = True
+TRAIN = False
 INITIAL = True & TRAIN
 # ================================================
 NUM_ACTIONS = 4
@@ -277,7 +277,9 @@ if __name__ == '__main__':
                 eps = agent.epsilon
                 if np.random.random() < eps:
                     action = env.action_space.sample()
-                frame, _, is_done, _ = env.step(action)
+                frame, reward, is_done, _ = env.step(action)
+                points += reward
                 frame_next = down_sample(rgb2gray(frame))
                 frame_stack.append(frame_next)
                 frame_stack = frame_stack[-STATE_LENGTH:]
+            print('Scores: %d' % points)
