@@ -1,19 +1,20 @@
 import os
-from keras import backend as K
-# ================================================
 # use plaidml as backend
 # install plaidml:
 # pip install plaidml-keras
 # plaidml-setup
+# ======================================================
 # os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
-# ================================================
+# ======================================================
+from keras import backend as K
 # use tensorflow as backend
+# ======================================================
 import tensorflow as tf
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 config = tf.ConfigProto()
 config.gpu_options.allow_growth = True
 K.set_session(tf.Session(config=config))
-# ================================================
+# ======================================================
 
 import numpy as np
 from keras.layers import Input, Dense, Flatten
