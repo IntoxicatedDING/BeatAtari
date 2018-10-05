@@ -1,4 +1,4 @@
-# BeatAtari
+# DQN-Beat-Atari
 Keras/TensorFlow implementation of an agent to beat Atari based on deep Q-Network.  
 This implementation has referred to the [code](https://github.com/devsisters/DQN-tensorflow.git) by devsisters.
 However, the tricks to make the model converge are too complicated and the agent can rarely achieve more than 100 points. You have to carefully adjust the hyper-parameters. 
