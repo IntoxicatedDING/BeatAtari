@@ -27,8 +27,7 @@ Setup PlaidML with:
 
 ## Results
 
-Result of training for about 20 hours using GTX 1080 ti.
-Actually, you can break through 300 points by 10000 games training, which takes about 10 hours on GTX 1080 ti.
+Result of training by duel network for about 24 hours in 9500 games using GTX 1080 ti.
 
 ![best](BeatAtari.gif)
 
